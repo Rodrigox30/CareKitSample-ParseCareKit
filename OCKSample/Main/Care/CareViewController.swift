@@ -157,6 +157,7 @@ class CareViewController: OCKDailyPageViewController {
         Task {
             do {
                 let tasks = try await fetchTasks(on: date)
+            
                 let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
 
                 let taskCards = tasks.compactMap {
@@ -216,8 +217,8 @@ class CareViewController: OCKDailyPageViewController {
     ) -> [UIViewController]? {
 
         var query = OCKEventQuery(for: Date())
-        query.taskIDs = [task.id]
-
+        query.taskIDs = [task.id, TaskID.heartRate]
+       
         switch task.id {
         case TaskID.steps:
             guard let event = getStoreFetchRequestEvent(for: task.id) else {
@@ -248,6 +249,17 @@ class CareViewController: OCKDailyPageViewController {
 
             return [OCKChecklistTaskViewController(query: query,
                                                    store: self.store)]
+        case TaskID.heartRate:
+            guard let event = getStoreFetchRequestEvent(for: task.id) else {
+                return nil
+            }
+            let view = NumericProgressTaskView<_NumericProgressTaskViewHeader>(
+                event: event,
+                numberFormatter: .none
+            )
+            .careKitStyle(CustomStylerKey.defaultValue)
+
+            return [view.formattedHostingController()]
 
         case TaskID.nausea:
             var cards = [UIViewController]()
@@ -294,7 +306,7 @@ class CareViewController: OCKDailyPageViewController {
                                                             store: self.store)
             cards.append(nauseaCard)
             return cards
-
+     
         default:
             return nil
         }
@@ -302,8 +314,9 @@ class CareViewController: OCKDailyPageViewController {
 
     private func fetchTasks(on date: Date) async throws -> [OCKAnyTask] {
         var query = OCKTaskQuery(for: date)
-        query.excludesTasksWithNoEvents = true
+        query.excludesTasksWithNoEvents = false
         let tasks = try await store.fetchAnyTasks(query: query)
+        print(tasks.last)
         let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
             tasks.first(where: { $0.id == orderedTaskID })
         }

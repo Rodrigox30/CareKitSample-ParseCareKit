@@ -54,7 +54,7 @@ struct CareView: UIViewControllerRepresentable {
 
     static func query() -> OCKEventQuery {
         var query = OCKEventQuery(for: Date())
-        query.taskIDs = [TaskID.steps]
+        query.taskIDs = [TaskID.steps, TaskID.heartRate]
         return query
     }
 }

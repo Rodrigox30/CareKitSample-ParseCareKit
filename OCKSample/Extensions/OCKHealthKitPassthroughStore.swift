@@ -14,7 +14,10 @@ import os.log
 extension OCKHealthKitPassthroughStore {
 
     func addTasksIfNotPresent(_ tasks: [OCKHealthKitTask]) async throws {
+        
         let tasksToAdd = tasks
+        
+        
         let taskIdsToAdd = tasksToAdd.compactMap { $0.id }
 
         // Prepare query to see if tasks are already added
@@ -23,10 +26,13 @@ extension OCKHealthKitPassthroughStore {
 
         let foundTasks = try await fetchTasks(query: query)
         var tasksNotInStore = [OCKHealthKitTask]()
+        print(foundTasks	)
 
         // Check results to see if there's a missing task
         tasksToAdd.forEach { potentialTask in
+            
             if foundTasks.first(where: { $0.id == potentialTask.id }) == nil {
+                
                 tasksNotInStore.append(potentialTask)
             }
         }
@@ -58,6 +64,23 @@ extension OCKHealthKitPassthroughStore {
                 quantityType: .cumulative,
                 unit: .count()))
         steps.asset = "figure.walk"
-        try await addTasksIfNotPresent([steps])
+        
+        
+        let heartRateSchedule = OCKSchedule.dailyAtTime(
+            hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
+            duration: .hours(12))
+        
+        var heartRate = OCKHealthKitTask(
+            id: TaskID.heartRate,
+            title: "Heart Rate",
+            carePlanUUID: nil,
+            schedule: heartRateSchedule,
+            healthKitLinkage: OCKHealthKitLinkage(
+                quantityIdentifier: .heartRate,
+                quantityType: .discrete,
+                unit:  HKUnit.count().unitDivided(by: HKUnit.minute())))
+        heartRate.asset = "figure.walk"
+        
+        try await addTasksIfNotPresent([steps,heartRate])
     }
 }

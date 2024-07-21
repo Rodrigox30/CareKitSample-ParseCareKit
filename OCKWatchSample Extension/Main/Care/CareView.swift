@@ -24,6 +24,7 @@ struct CareView: View {
                 } else if event.result.task.id == TaskID.stretch {
                     InstructionsTaskView(event: event)
                 }
+                
             }
         }
     }

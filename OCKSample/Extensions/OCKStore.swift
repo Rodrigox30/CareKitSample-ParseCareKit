@@ -21,7 +21,8 @@ extension OCKStore {
         // Prepare query to see if tasks are already added
         var query = OCKTaskQuery(for: Date())
         query.ids = taskIdsToAdd
-
+        print("DOES THIS EVEN HAPPEN?")
+        
         let foundTasks = try await fetchTasks(query: query)
         var tasksNotInStore = [OCKTask]()
 
@@ -133,6 +134,8 @@ extension OCKStore {
                               schedule: stretchSchedule)
         stretch.impactsAdherence = true
         stretch.asset = "figure.walk"
+        
+    
 
         try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
 
