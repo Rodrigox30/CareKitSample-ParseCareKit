@@ -316,7 +316,7 @@ class CareViewController: OCKDailyPageViewController {
         var query = OCKTaskQuery(for: date)
         query.excludesTasksWithNoEvents = false
         let tasks = try await store.fetchAnyTasks(query: query)
-        print(tasks.last)
+        
         let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
             tasks.first(where: { $0.id == orderedTaskID })
         }

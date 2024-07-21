@@ -26,7 +26,6 @@ extension OCKHealthKitPassthroughStore {
 
         let foundTasks = try await fetchTasks(query: query)
         var tasksNotInStore = [OCKHealthKitTask]()
-        print(foundTasks	)
 
         // Check results to see if there's a missing task
         tasksToAdd.forEach { potentialTask in
