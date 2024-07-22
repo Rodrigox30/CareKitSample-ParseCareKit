@@ -50,7 +50,7 @@ extension OCKHealthKitPassthroughStore {
     func populateSampleData() async throws {
 
         let schedule = OCKSchedule.dailyAtTime(
-            hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
+            hour: 0, minutes: 0, start: Date(), end: nil, text: nil,
             duration: .hours(12), targetValues: [OCKOutcomeValue(2000.0, units: "Steps")])
 
         var steps = OCKHealthKitTask(
@@ -66,7 +66,7 @@ extension OCKHealthKitPassthroughStore {
         
         
         let heartRateSchedule = OCKSchedule.dailyAtTime(
-            hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
+            hour: 0, minutes: 0, start: Date(), end: nil, text: nil,
             duration: .hours(12))
         
         var heartRate = OCKHealthKitTask(
@@ -80,6 +80,23 @@ extension OCKHealthKitPassthroughStore {
                 unit:  HKUnit.count().unitDivided(by: HKUnit.minute())))
         heartRate.asset = "figure.walk"
         
-        try await addTasksIfNotPresent([steps,heartRate])
+        
+        let bloodPressureSchedule = OCKSchedule.dailyAtTime(
+            hour: 0, minutes: 0, start: Date(), end: nil, text: nil,
+            duration: .hours(12))
+        
+        var bloodPressure = OCKHealthKitTask(
+            id: TaskID.bloodPressure,
+            title: "Blood Pressure",
+            carePlanUUID: nil,
+            schedule: heartRateSchedule,
+            healthKitLinkage: OCKHealthKitLinkage(
+                quantityIdentifier: .bloodPressureSystolic,
+                quantityType: .discrete,
+                unit:  .millimeterOfMercury()))
+        heartRate.asset = "figure.walk"
+
+        
+        try await addTasksIfNotPresent([steps,heartRate, bloodPressure])
     }
 }

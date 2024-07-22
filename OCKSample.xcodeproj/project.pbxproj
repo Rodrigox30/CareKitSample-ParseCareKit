@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5173CB8A23C3A846007655A0 /* OCKSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5173CB8923C3A846007655A0 /* OCKSampleUITests.swift */; };
+		5BF8CC402C4E03730081EA5D /* ObjectiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8CC3F2C4E03730081EA5D /* ObjectiveView.swift */; };
 		70077597252228E900EC0EDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70077596252228E900EC0EDA /* User.swift */; };
 		7007759B252229C900EC0EDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70077596252228E900EC0EDA /* User.swift */; };
 		700DA93E2C35D33500435E2C /* CareKitEssentials in Frameworks */ = {isa = PBXBuildFile; productRef = 700DA93D2C35D33500435E2C /* CareKitEssentials */; };
@@ -155,6 +156,7 @@
 		5173CB8923C3A846007655A0 /* OCKSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKSampleUITests.swift; sourceTree = "<group>"; };
 		5173CB8B23C3A846007655A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F6343923D2877B00FE576E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		5BF8CC3F2C4E03730081EA5D /* ObjectiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveView.swift; sourceTree = "<group>"; };
 		70077596252228E900EC0EDA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		70221F2728D7809800971195 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		70221F2928D7BE0600971195 /* AppDelegate+ParseRemoteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+ParseRemoteDelegate.swift"; sourceTree = "<group>"; };
@@ -274,6 +276,14 @@
 			path = OCKSampleUITests;
 			sourceTree = "<group>";
 		};
+		5BF8CC3E2C4E03430081EA5D /* ObjectiveTask */ = {
+			isa = PBXGroup;
+			children = (
+				5BF8CC3F2C4E03730081EA5D /* ObjectiveView.swift */,
+			);
+			path = ObjectiveTask;
+			sourceTree = "<group>";
+		};
 		70221F2B28D7C7C600971195 /* CustomCards */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +313,7 @@
 		703088772582727500FFABB6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5BF8CC3E2C4E03430081EA5D /* ObjectiveTask */,
 				70221F2728D7809800971195 /* MainTabView.swift */,
 				7036E4D2256EBE35006E9A3C /* MainView.swift */,
 				70308878258272CD00FFABB6 /* Care */,
@@ -802,6 +813,7 @@
 				7099D20229E98DDF0037CD8E /* MainViewPath.swift in Sources */,
 				70221F2A28D7BE0600971195 /* AppDelegate+ParseRemoteDelegate.swift in Sources */,
 				7036E4D3256EBE35006E9A3C /* MainView.swift in Sources */,
+				5BF8CC402C4E03730081EA5D /* ObjectiveView.swift in Sources */,
 				918FDEC5271B4EA70045A0EF /* StoreCoordinatorKey.swift in Sources */,
 				91693822271B897200A634ED /* Utility.swift in Sources */,
 				707CC718254DA91900116728 /* OCKLocalization.swift in Sources */,

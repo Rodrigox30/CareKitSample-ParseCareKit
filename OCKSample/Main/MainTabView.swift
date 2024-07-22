@@ -52,6 +52,18 @@ struct MainTabView: View {
                     }
                 }
                 .tag(2)
+            ObjectiveView()
+                .tabItem {
+                    if selectedTab == 3 {
+                        Image("connect-filled")
+                            .renderingMode(.template)
+                    } else {
+                        Image("connect")
+                            .renderingMode(.template)
+                    }
+                }
+                .tag(3)
+                
         }
     }
 }
