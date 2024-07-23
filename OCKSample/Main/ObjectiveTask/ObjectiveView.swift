@@ -27,8 +27,6 @@ struct ObjectiveView: View {
             
         }
         .onAppear{
-            print("DOES ITS TASK")
-            var tasks = [OCKOutcomeValue]()
             for event in events{
                 
                 guard let outcome = event.result.outcomeValues?.first else { continue}

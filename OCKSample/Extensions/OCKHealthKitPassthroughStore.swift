@@ -131,7 +131,7 @@ extension OCKHealthKitPassthroughStore {
             healthKitLinkage: OCKHealthKitLinkage(
                 quantityIdentifier: .activeEnergyBurned,
                 quantityType: .discrete,
-                unit:  .kilocalorie()))
+                unit:  .largeCalorie()))
         activeEnergyBurned.asset = "figure.walk"
         
         
