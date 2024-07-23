@@ -15,13 +15,14 @@ import UIKit
 
 struct ObjectiveView: View {
     @CareStoreFetchRequest(query: query()) private var events
-    @State var taskOutcomes = [String: OCKOutcomeValue]()
+    @State var taskOutcomes = [String: (NSNumber, String)]()
    
     
     var body: some View {
-        VStack{
+        ScrollView{
             ForEach(Array(taskOutcomes.keys), id: \.self) { key in
-                statView(title: key, outcome: taskOutcomes[key]?.numberValue ?? 2)
+                StatView(title: key, outcome: taskOutcomes[key]?.0 ?? 0, units: taskOutcomes[key]?.1 ?? "None")
+                    .padding()
             }
             
         }
@@ -29,13 +30,15 @@ struct ObjectiveView: View {
             print("DOES ITS TASK")
             var tasks = [OCKOutcomeValue]()
             for event in events{
-                guard let outcomeTest = event.result.outcomeValues else { return}
-                for outcome in event.result.outcomeValues! {
+                
+                guard let outcome = event.result.outcomeValues?.first else { continue}
+               
+                
+                taskOutcomes[event.result.title] = (outcome.numberValue!, outcome.units!)
+                
+                
+                
                     
-                    taskOutcomes[event.result.title] = outcome
-                }
-                
-                
             }
            
         }
@@ -43,8 +46,9 @@ struct ObjectiveView: View {
         
     
     static func query() -> OCKEventQuery {
+        print("BEFORE?")
         var query = OCKEventQuery(for: Date())
-        query.taskIDs = [TaskID.steps, TaskID.heartRate, TaskID.bloodPressure]
+        query.taskIDs = TaskID.objective
         return query
     }
     
